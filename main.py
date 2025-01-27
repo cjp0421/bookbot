@@ -19,15 +19,26 @@ def character_count (book):
             characters_count[character] = 1
     return characters_count
 
+def sort_on(dict):
+    return dict["num"]
+
 def create_report (file, file_path):
     num_words = word_count(file)
     characters_count = character_count(file)
-    alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
-    print(f"Begin Report on {file_path}:\nNumber of words: {num_words}\n",
+    letter_count_only = list()
+    print(f"--- Begin Report on {file_path} ---\n{num_words} words found in the document\n",
           )
-    for character in characters_count:    
-        if character in alphabet:
-            print(f"{character} is in the book {characters_count[character]} times." )
+    for character in characters_count:
+        letter_combo = {}
+        if character not in letter_count_only:
+            if character.isalpha():
+                letter_combo["name"] = character
+                letter_combo["num"] = characters_count[character]
+                letter_count_only.append(letter_combo)
+    letter_count_only.sort(reverse=True, key=sort_on)
+    for letter_count in letter_count_only:
+        print(f"The '{letter_count['name']}' character was found {letter_count['num']} times")
+
 
 def main ():
     file_contents = read_and_print_file("books/frankenstein.txt")
