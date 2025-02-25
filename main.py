@@ -1,12 +1,11 @@
+from stats import word_count
+import sys
+
 def read_and_print_file (file):
     with open(file) as f:
         file_contents = f.read()
         # print(file_contents)
     return file_contents
-
-def word_count (book):
-    words = book.split()
-    return len(words)
 
 def character_count (book):
     characters_string = book.lower()
