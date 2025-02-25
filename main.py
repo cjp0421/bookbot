@@ -36,11 +36,14 @@ def create_report (file, file_path):
                 letter_count_only.append(letter_combo)
     letter_count_only.sort(reverse=True, key=sort_on)
     for letter_count in letter_count_only:
-        print(f"The '{letter_count['name']}' character was found {letter_count['num']} times")
-
+        # print(f"The '{letter_count['name']}' character was found {letter_count['num']} times")
+        print(f"{letter_count['name']}: {letter_count['num']}")
 
 def main ():
-    file_contents = read_and_print_file("books/frankenstein.txt")
-    create_report(file_contents, "books/frankenstein.txt")
+    if len(sys.argv) < 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    file_contents = read_and_print_file(sys.argv[1])
+    create_report(file_contents, sys.argv[1])
 
 main()
